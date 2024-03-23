@@ -71,15 +71,15 @@ def game(screen_, lvl, fps_:pg.Clock, textures:list):
                             fish.direction = False
                             fish.position.x = turn.position.x + 20
                     elif not fish.direction:
-                        if fish.position.y < turn.position.y:
-                            fish.position.y = turn.position.y
+                        if fish.position.y < turn.position.y+3:
+                            fish.position.y = turn.position.y+3
                     if turn.directions.x:
                         if (not fish.direction) and checkCollisionRecs(pg.Rect(fish.position.x, fish.position.y, 20, 20), pg.Rect(turn.position.x, turn.position.y, 50, 50)) and checkCollisionRecs(pg.Rect(fish.position.x, fish.position.y+30, 20, 20), pg.Rect(turn.position.x, turn.position.y, 50, 50)) and checkCollisionRecs(pg.Rect(fish.position.x - 180, fish.position.y - 20, 390, 90), pg.Rect(food.position.x, food.position.y, 30, 30))and not checkCollisionRecs(fish.foodBounds, pg.Rect(food.position.x, food.position.y, 30, 30)):
                             fish.direction = True
                             fish.position.y = turn.position.y + 20
                     elif fish.direction:
-                        if fish.position.x + 50 > turn.position.x + 60:
-                            fish.position.x = turn.position.x + 10
+                        if fish.position.x + 50 > turn.position.x + 57:
+                            fish.position.x = turn.position.x + 7
                     if turn.directions.y:
                         #print("down")
                         if (fish.direction) and checkCollisionRecs(pg.Rect(fish.position.x, fish.position.y, 20, orientation.y), pg.Rect(turn.position.x, turn.position.y, 50, 50)) and checkCollisionRecs(pg.Rect(fish.position.x + 30, fish.position.y, 20, orientation.y), pg.Rect(turn.position.x, turn.position.y, 50, 50)) and checkCollisionRecs(pg.Rect(fish.position.x - 20, fish.position.y - 180, 90, 390), pg.Rect(food.position.x, food.position.y, 30, 30)) and not checkCollisionRecs(fish.foodBounds, pg.Rect(food.position.x, food.position.y, 30, 30)):
@@ -87,16 +87,16 @@ def game(screen_, lvl, fps_:pg.Clock, textures:list):
                             fish.position.x = turn.position.x + 20
                             print(fish.direction)
                     elif not fish.direction:
-                        if fish.position.y + 50> turn.position.y + 60:
+                        if fish.position.y + 50> turn.position.y + 57:
                             print("aaaa")
-                            fish.position.y = turn.position.y + 10
+                            fish.position.y = turn.position.y + 7
                     if turn.directions.z:
                         if (not fish.direction) and checkCollisionRecs(pg.Rect(fish.position.x, fish.position.y, 20, 20), pg.Rect(turn.position.x, turn.position.y, 50, 50)) and checkCollisionRecs(pg.Rect(fish.position.x, fish.position.y+30, 20, 20), pg.Rect(turn.position.x, turn.position.y, 50, 50)) and checkCollisionRecs(pg.Rect(fish.position.x - 180, fish.position.y - 20, 390, 90), pg.Rect(food.position.x, food.position.y, 30, 30))and not checkCollisionRecs(fish.foodBounds, pg.Rect(food.position.x, food.position.y, 30, 30)):
                             fish.direction = True
                             fish.position.y = turn.position.y + 20
                     elif fish.direction:
-                        if fish.position.x < turn.position.x:
-                            fish.position.x = turn.position.x
+                        if fish.position.x < turn.position.x + 3:
+                            fish.position.x = turn.position.x + 3
             if checkCollisionRecs(pg.Rect(fish.position.x, fish.position.y,50, 50), pg.Rect(ends[i].position.x, ends[i].position.y, 50, 50)):
                 fish.freed = True
             else:
@@ -119,22 +119,14 @@ def game(screen_, lvl, fps_:pg.Clock, textures:list):
             screen.blit(textures[i+5], end.position)
         for fish in fishes:
             if fish.direction:
-                #pen.rect(screen, (0, 255, 0), fish.foodBounds)
-                #pen.rect(screen, (255, 20, 239), pg.Rect(fish.position.x - 20, fish.position.y - 180, 90, 390))
                 if (food.position.x < fish.position.x + 25):
-                    pen.rect(screen, (0, 255, 255), pg.Rect(fish.position.x, fish.position.y, 50, 20))
                     screen.blit(fish.texture, (fish.position.x, fish.position.y))
                 else:
-                    pen.rect(screen, (0, 255, 255), pg.Rect(fish.position.x, fish.position.y, 50, 20))
                     screen.blit(pg.transform.flip(fish.texture, True, False), (fish.position.x, fish.position.y))
             else:
-                #pen.rect(screen, (0, 255, 0), fish.foodBounds)
-                #pen.rect(screen, (255, 20, 239), pg.Rect(fish.position.x - 180, fish.position.y - 20, 390, 90))
                 if (food.position.y > fish.position.y + 25):
-                    pen.rect(screen, (0, 255, 255), pg.Rect(fish.position.x, fish.position.y, 20, 50))
                     screen.blit(fish.rot_t, (fish.position.x, fish.position.y))
                 else:
-                    pen.rect(screen, (0, 255, 255), pg.Rect(fish.position.x, fish.position.y, 20, 50))
                     screen.blit(pg.transform.flip(fish.rot_t, False, True), (fish.position.x, fish.position.y))
         screen.blit(t_food, food.position)
         pen.rect(screen, (0,255,0), pg.Rect(pg.mouse.get_pos()[0], pg.mouse.get_pos()[1], 2, 2))
