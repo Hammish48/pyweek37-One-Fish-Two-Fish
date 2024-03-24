@@ -24,4 +24,4 @@ Basically there are fish trapped in water pipes and you basically have to use so
 
 all art and code where done by me (hammish47)<br>
 sound effects generated with https://sfxr.me/ <br>
-music is space fighter loop by Kevin MacLeod (the royalty free god) https://incompetech.com/
+music is Sergio Magic Dustbin by Kevin MacLeod (the royalty free god) https://incompetech.com/
