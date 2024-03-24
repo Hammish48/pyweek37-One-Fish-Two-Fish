@@ -21,6 +21,7 @@ def game(screen_, lvl, fps_:pg.Clock, textures:list):
     winningPipes = []
     ends = []
     food = Food(100, 100)
+    cooldwn = False
     match (lvl):
         case 0:
             fishes = [Fish(415, 60, False, t_red_fish)]
@@ -36,19 +37,41 @@ def game(screen_, lvl, fps_:pg.Clock, textures:list):
             pipes = [LongPipe(100, 150, 100, 500), LongPipe(160, 500, 300, 500), LongPipe(300, 150, 300, 500), LongPipe(700, 70, 700, 530)]
             winningPipes = [LongPipe(700, 530, 700, 800), LongPipe(300, -70, 300, 100)]
             food = Food(600, 120)
-        case 90:
-            fishes = [Fish(500, 300, True, t_blue_fish), Fish(300, 400, False, t_red_fish)]
-            turns = [Turn(300, 300, Vec4Bool(False, True, True, False)), Turn(300, 500, Vec4Bool(True, True, False, True)), Turn(800, 500, Vec4Bool(True, False, True, True)), Turn(800, 300, Vec4Bool(False, True, True, True)), Turn(800, 600, Vec4Bool(True, False, False, False)), Turn(200, 500, Vec4Bool(True, True, False, False))]
+        case 2:
+            fishes = [Fish(400, 315, True, t_red_fish), Fish(550, 315, True, t_blue_fish)]
+            turns = [Turn(200, 200, Vec4Bool(False, False, True, False)) ,Turn(300, 300, Vec4Bool(False, True, True, False)), Turn(300, 500, Vec4Bool(True, True, False, True)), Turn(800, 500, Vec4Bool(True, False, True, True)), Turn(800, 300, Vec4Bool(False, False, True, True)), Turn(800, 600, Vec4Bool(True, False, False, False)), Turn(200, 500, Vec4Bool(True, True, False, False))]
             #turn format is: up, right, down, left    clockwise openings
-            pipes = [LongPipe(360, 300, 800, 300), LongPipe(300, 360, 300, 500)]
-            winningPipes = [LongPipe(800, 600, 800, 800)]
-            food = Food(200,200)
+            pipes = [LongPipe(200, 260, 200, 500), LongPipe(360, 300, 800, 300), LongPipe(300, 360, 300, 500), LongPipe(800, 360, 800, 600), LongPipe(250, 500, 800, 500)]
+            winningPipes = [LongPipe(800, 600, 800, 800), LongPipe(200, -60, 200, 220)]
+            food = Food(500,200)
             ends = [End(800, 600, False, False), End(200, 200, False, True)]
-        case 45:
-            pipes = [LongPipe(300, 300, 600, 300)]
-            food = Food(700,200)
-            fishes = [Fish(500, 300, True, t_blue_fish), Fish(300, 400, False, t_red_fish), Fish(700, 400, False, t_green_fish), Fish(400, 500, False, t_yellow_fish)]
-            ends = [End(800, 600, False, False), End(200, 200, False, True), End(200, 400, False, True), End(800, 200, False, True)]
+        case 4:
+            fishes = [Fish(560, 600, True, t_red_fish), Fish(690, 670, True, t_blue_fish)]
+            turns = [Turn(500, 575, Vec4Bool(False, True, False, False)), Turn(750, 655, Vec4Bool(False, False, False, True)),Turn(700, 100, Vec4Bool(False, True, True, False)),Turn(700, 340, Vec4Bool(True, False, False, True)), Turn(500, 340, Vec4Bool(True, True, False, False)), Turn(500, 145, Vec4Bool(False, False, True, True)),Turn(900, 100, Vec4Bool(False, False, True, True)), Turn(300, 145, Vec4Bool(False, True, True, False)), Turn(900, 575, Vec4Bool(True, False, False, True)) ,Turn(300, 655, Vec4Bool(True, True, False, False))]
+            ends = [End(750, 655, True, False), End(500, 575, False, False)]
+            pipes = [LongPipe(700, 100, 900, 100), LongPipe(700, 100, 700, 340),LongPipe(500, 340, 700, 340), LongPipe(500, 145, 500, 340), LongPipe(300, 145, 500, 145), LongPipe(300, 145, 300, 665), LongPipe(300, 655, 750, 655), LongPipe(500, 575, 900, 575), LongPipe(900, 100, 900, 575)]
+            food = Food(650, 480)
+        case 3:
+            fishes = [Fish(470, 600, False, t_red_fish), Fish(400, 600, False, t_blue_fish)]
+            turns = [Turn(1000, 300, Vec4Bool(False, False, False, True)),Turn(455, 300, Vec4Bool(True, True, True, False)),Turn(455, 100, Vec4Bool(False, False, True, False)),Turn(455, 610, Vec4Bool(True, False, False, False)),Turn(375, 100, Vec4Bool(False, False, True, True)),Turn(375, 100, Vec4Bool(False, False, True, True)),Turn(200, 100, Vec4Bool(False, True, False, False)),Turn(375, 610, Vec4Bool(True, False, False, False))]
+            pipes = [LongPipe(260, 100, 375, 100),LongPipe(455, 100, 455, 610),LongPipe(375, 100, 375, 610), LongPipe(515, 300, 1000, 300)]
+            winningPipes = [LongPipe(-60, 100, 260, 100), LongPipe(1000, 300, 1400, 300)]
+            ends = [End(1000, 300, True, False), End(200, 100, False, False)]
+            food = Food(100, 100)
+        case 5:
+            fishes = [Fish(315, 70, False, t_red_fish), Fish(140, 345, True, t_blue_fish), Fish(515, 70, False, t_green_fish), Fish(715, 70, False, t_yellow_fish)]
+            turns = [Turn(700, 610, Vec4Bool(True, False, False, False)),Turn(500, 610, Vec4Bool(True, False, False, False)),Turn(300, 610, Vec4Bool(True, False, False, False)),Turn(700, 40, Vec4Bool(False, False, True, False)),Turn(500, 40, Vec4Bool(False, False, True, False)),Turn(300, 610, Vec4Bool(True, False, False, False)),Turn(300, 40, Vec4Bool(False, False, True, False)),Turn(70, 330, Vec4Bool(False, True, False, False)),Turn(1115, 330, Vec4Bool(False, False, False, True)),Turn(300, 330, Vec4Bool(True, True, True, True)),Turn(700, 330, Vec4Bool(True, True, True, True)),Turn(500, 330, Vec4Bool(True, True, True, True))]
+            pipes = [LongPipe(300, 100, 300, 610), LongPipe(130, 330, 1115, 330), LongPipe(500, 100, 500, 610), LongPipe(700, 100, 700, 610)]
+            winningPipes = [LongPipe(300, 610, 300, 800), LongPipe(500, 610, 500, 800), LongPipe(700, 610, 700, 800), LongPipe(1100, 330, 1300, 330)]
+            ends = [End(300, 610, False, False),End(1100, 330, True, False), End(500, 610, False, False), End(700, 610, False, False)]
+            food = Food(1115, 645)
+        case 6:
+            fishes = [Fish(615, 100, False, t_red_fish), Fish(615, 560, False, t_blue_fish), Fish(1050, 345, True, t_green_fish), Fish(140, 345, True, t_yellow_fish)]
+            turns = [Turn(70, 330, Vec4Bool(False, True, False, False)),Turn(1115, 330, Vec4Bool(False, False, False, True)),Turn(600, 330, Vec4Bool(True, True, True, True)), Turn(600, 610, Vec4Bool(True, False, False, False)), Turn(600, 50, Vec4Bool(False, False, True, False))]
+            pipes = [LongPipe(600, 100, 600, 610), LongPipe(130, 330, 1115, 330)]
+            winningPipes = [LongPipe(-60, 330, 130, 330), LongPipe(1100, 330, 1400, 330), LongPipe(600, 600, 600, 800), LongPipe(600, -60, 600, 60)]
+            ends = [End(600, 600, False, False),End(1100, 330, True, False), End(80, 330, False, False), End(600, 60, False, True)]
+            food = Food(615, 345)
     for pipe in pipes:
         pipe.initSurface()
     for pipe in winningPipes:
@@ -69,6 +92,15 @@ def game(screen_, lvl, fps_:pg.Clock, textures:list):
             if not pg.mouse.get_pressed()[0]:
                 food.grabbed = False
         freedFishes = 0
+
+
+        if not pg.key.get_pressed()[pg.K_s]:
+            cooldwn = False
+        if pg.key.get_pressed()[pg.K_s] and not cooldwn:
+            freedFishes = len(fishes)
+            cooldwn = True
+        
+
         if not won:
             for i,fish in enumerate(fishes):
                 if (fish.direction):
@@ -76,12 +108,11 @@ def game(screen_, lvl, fps_:pg.Clock, textures:list):
                 else:
                     fish.foodBounds = pg.Rect(fish.position.x - 45, fish.position.y - 180, 110, 390)
                 if checkCollisionRecs(pg.Rect(food.position.x, food.position.y, 30, 30), fish.foodBounds):
+                    speed = 0.02
                     if i == 0:
                         speed = 0.026
-                    elif i == 1:
-                        speed = 0.02
                     elif i == 2:
-                        0.034
+                        speed = 0.034
                     elif i == 3:
                         speed = 0.01
                     if fish.direction:
@@ -157,7 +188,7 @@ def game(screen_, lvl, fps_:pg.Clock, textures:list):
         if pg.mouse.get_pressed()[0]:
             clickCooldown = True
         #drawing
-        screen.fill((255, 255, 255))
+        screen.fill((100, 100, 100))
         for pipe in pipes:
             screen.blit(pipe.buffer, pipe.p1)
         for t in turns:
@@ -184,6 +215,8 @@ def game(screen_, lvl, fps_:pg.Clock, textures:list):
             pen.rect(screen, (20, 255, 40), pg.Rect(food.position.x-5, food.position.y-5, 40, 40))
         if lvl == 1:
             screen.blit(font.render("now there are 2 fishes", True, (0, 0, 0)), (450, 50))
+        screen.blit(font.render(f"level: {lvl}", True, (0,0,0)), (10, 10))
+        screen.blit(font.render(f"fishes left: {len(fishes)-freedFishes}", True, (0,0,0)), (10, 40))
         screen.blit(t_food, food.position)
         pen.rect(screen, (0,255,0), pg.Rect(pg.mouse.get_pos()[0], pg.mouse.get_pos()[1], 2, 2))
         fps_.tick(60)
@@ -196,6 +229,12 @@ def main(screen:pg.Surface):
     pg.image.load("./assets/yellow fish.png").convert_alpha(),
     pg.image.load("./assets/green fish.png").convert_alpha(),
     pg.image.load("./assets/food.png").convert_alpha(), pg.image.load("./assets/red flag.png"), pg.image.load("./assets/blue flag.png"), pg.image.load("./assets/yellow flag.png"), pg.image.load("./assets/green flag.png")]
+    pg.mixer.music.load("./assets/Sergio Magic Dustbin.mp3")
+    pg.mixer.music.set_volume(0.2)
+    pg.mixer.music.play(-1)
+    sound = pg.mixer.Sound("./assets/lc.mp3")
     mainMenu(screen, fps)
-    game(screen, 1, fps, textures)
+    for level in range(7):
+        game(screen, level, fps, textures)
+        sound.play()
     endMenu(screen, fps)

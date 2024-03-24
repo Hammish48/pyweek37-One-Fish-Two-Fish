@@ -18,11 +18,12 @@ def mainMenu(screen:pg.Surface, fps:pg.Clock):
 
 
 def endMenu(screen:pg.Surface, fps:pg.Clock):
+    img = pg.image.load("./assets/end screen.png").convert()
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 pg.quit()
                 sys.exit()
-        screen.fill((0,0,0))
+        screen.blit(img, (0,0))
         fps.tick(20)
         pg.display.update()

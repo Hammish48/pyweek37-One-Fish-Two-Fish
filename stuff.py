@@ -39,9 +39,9 @@ class Turn:
                 if (directions.w):
                     self.texture = pg.transform.flip(self.texture, False, True)
                 elif (directions.x):
-                    self.texture = pg.transform.rotate(self.texture, 270)
+                    self.texture = pg.transform.rotate(self.texture, -270)
                 elif (directions.z):
-                    self.texture = pg.transform.rotate(self.texture, 90)
+                    self.texture = pg.transform.rotate(self.texture, -90)
             case 2:
                 self.texture = pg.image.load("./assets/pipes/two ends corner.png").convert_alpha()
                 if directions.w:
