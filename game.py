@@ -21,7 +21,6 @@ def game(screen_, lvl, fps_:pg.Clock, textures:list):
     winningPipes = []
     ends = []
     food = Food(100, 100)
-    cooldwn = False
     match (lvl):
         case 0:
             fishes = [Fish(415, 60, False, t_red_fish)]
@@ -92,15 +91,7 @@ def game(screen_, lvl, fps_:pg.Clock, textures:list):
             if not pg.mouse.get_pressed()[0]:
                 food.grabbed = False
         freedFishes = 0
-
-
-        if not pg.key.get_pressed()[pg.K_s]:
-            cooldwn = False
-        if pg.key.get_pressed()[pg.K_s] and not cooldwn:
-            freedFishes = len(fishes)
-            cooldwn = True
         
-
         if not won:
             for i,fish in enumerate(fishes):
                 if (fish.direction):
